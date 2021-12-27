@@ -1,3 +1,5 @@
+#pragma once
+
 #include "graph.hpp"
 #include "graph_path.hpp"
 #include "graph_traverser.hpp"

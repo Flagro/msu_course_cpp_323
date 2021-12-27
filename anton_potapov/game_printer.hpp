@@ -1,3 +1,5 @@
+#pragma once
+
 #include "game.hpp"
 
 namespace uni_cource_cpp {

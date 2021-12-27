@@ -1,3 +1,5 @@
+#pragma once
+
 #include "game.hpp"
 #include "graph_generator.hpp"
 
