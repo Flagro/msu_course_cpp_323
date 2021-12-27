@@ -43,6 +43,8 @@ class Edge {
        const VertexId& vertex2,
        const EdgeColor& edge_color);
 
+  const Duration& get_duration();
+
  private:
   Duration duration_;
 };

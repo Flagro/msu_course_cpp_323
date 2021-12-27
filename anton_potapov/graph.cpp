@@ -57,6 +57,10 @@ Edge::Edge(const EdgeId& edge_id,
   duration_ = get_edge_duration(edge_color);
 }
 
+const Duration& Edge::get_duration() {
+  return duration_;
+}
+
 const std::set<EdgeId>& Vertex::connected_edges() const {
   return connected_edges_;
 }
