@@ -33,7 +33,7 @@ void GraphTraversalController::init_jobs(
       const auto graph_last_depth = graph.depth();
       const auto last_depth_vertices_id =
           graph.get_vertices_at_depth(graph_last_depth);
-      const auto graph_paths = GraphTraverser(graph).find_all_paths(
+      const auto graph_paths = GraphTraverser(graph).find_all_shortest_paths(
           root_vertex_id, last_depth_vertices_id);
       {
         const std::lock_guard controller_lock(controller_mutex_);

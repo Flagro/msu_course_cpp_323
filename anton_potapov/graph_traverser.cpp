@@ -71,9 +71,10 @@ std::map<VertexId, int> GraphTraverser::get_updated_depths(
   return depths;
 }
 
-GraphPath GraphTraverser::find_shortest_path(
+GraphPath find_dijkstra_path(
     VertexId source_vertex_id,
-    VertexId destination_vertex_id) const {
+    VertexId destination_vertex_id,
+    const TraversalStartedCallback& get_weight_callback) const {
   std::map<VertexId, GraphPath::Distance> distance;
   distance[source_vertex_id] = 0;
   std::map<VertexId, std::pair<VertexId, EdgeId>> previous_vertex_id;
@@ -91,11 +92,12 @@ GraphPath GraphTraverser::find_shortest_path(
       const auto& next_vertex_id = (current_edge.vertex1_id == current_vertex_id
                                         ? current_edge.vertex2_id
                                         : current_edge.vertex1_id);
+      const auto edge_weight = get_weight_callback(edge_id);
       if (distance.find(next_vertex_id) == distance.end() ||
-          current_distance + DEFAULT_DISTANCE < distance[next_vertex_id]) {
+          current_distance + edge_weight < distance[next_vertex_id]) {
         lowest_distance_set.erase(
             std::make_pair(distance[next_vertex_id], next_vertex_id));
-        distance[next_vertex_id] = current_distance + DEFAULT_DISTANCE;
+        distance[next_vertex_id] = current_distance + edge_weight;
         lowest_distance_set.insert(
             std::make_pair(distance[next_vertex_id], next_vertex_id));
         previous_vertex_id[next_vertex_id] =
@@ -123,7 +125,24 @@ GraphPath GraphTraverser::find_shortest_path(
   return GraphPath(vertices_id_path, edges_id_path);
 }
 
-std::vector<GraphPath> GraphTraverser::find_all_paths(
+GraphPath GraphTraverser::find_shortest_path(
+    VertexId source_vertex_id,
+    VertexId destination_vertex_id) const {
+  return find_dijkstra_path(
+      source_vertex_id, destination_vertex_id,
+      [](const EdgeId& edge_id) { return DEFAULT_DISTANCE; });
+}
+
+GraphPath GraphTraverser::find_fastest_path(
+    VertexId source_vertex_id,
+    VertexId destination_vertex_id) const {
+  return find_dijkstra_path(source_vertex_id, destination_vertex_id,
+                            [this](const EdgeId& edge_id) {
+                              return graph_.get_edge(edge_id).get_duration();
+                            });
+}
+
+std::vector<GraphPath> GraphTraverser::find_all_shortest_paths(
     VertexId source_vertex_id,
     std::set<VertexId> destination_vertices_ids) const {
   std::vector<GraphPath> result;

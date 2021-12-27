@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <map>
 #include <queue>
 #include <tuple>
@@ -18,11 +19,20 @@ class GraphTraverser {
       int start_depth);
   GraphPath find_shortest_path(VertexId source_vertex_id,
                                VertexId destination_vertex_id) const;
-  std::vector<GraphPath> find_all_paths(
+  GraphPath find_fastest_path(VertexId source_vertex_id,
+                              VertexId destination_vertex_id) const;
+  std::vector<GraphPath> find_all_shortest_paths(
       VertexId source_vertex_id,
       std::set<VertexId> destination_vertices_ids) const;
 
  private:
+  using TraversalStartedCallback = std::function<void(const EdgeId& edge_id)>;
+
   const Graph& graph_;
+
+  GraphPath find_dijkstra_path(
+      VertexId source_vertex_id,
+      VertexId destination_vertex_id,
+      const TraversalStartedCallback& get_weight_callback) const;
 };
 }  // namespace uni_cource_cpp
