@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <algorithm>
+#include <array>
 #include <cassert>
 #include <random>
 #include <utility>
@@ -9,6 +10,42 @@
 #include "graph.hpp"
 #include "graph_traverser.hpp"
 
+namespace {
+using uni_cource_cpp::Edge;
+using uni_cource_cpp::EdgeColor;
+
+constexpr std::array<Edge::Duration, 2> grey_duration_segment = {1, 2};
+constexpr std::array<Edge::Duration, 2> green_duration_segment = {1, 2};
+constexpr std::array<Edge::Duration, 2> blue_duration_segment = {1, 2};
+constexpr std::array<Edge::Duration, 2> yellow_duration_segment = {1, 3};
+constexpr std::array<Edge::Duration, 2> red_duration_segment = {2, 4};
+
+std::array<Edge::Duration, 2> get_edge_duration_segment(
+    const EdgeColor& edge_color) {
+  switch (edge_color) {
+    case EdgeColor::Gray:
+      return grey_duration_segment;
+    case EdgeColor::Green:
+      return green_duration_segment;
+    case EdgeColor::Blue:
+      return blue_duration_segment;
+    case EdgeColor::Yellow:
+      return yellow_duration_segment;
+    case EdgeColor::Red:
+      return red_duration_segment;
+  }
+}
+
+Edge::Duration get_edge_duration(const EdgeColor& edge_color) {
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  const duration_segment = get_edge_duration_segment(edge_color);
+  std::uniform_int_distribution<> distr(duration_segment[0],
+                                        duration_segment[1]);
+  return distr(gen);
+}
+}  // namespace
+
 namespace uni_cource_cpp {
 Vertex::Vertex(const VertexId& vertex_id) : id(vertex_id) {}
 
@@ -16,10 +53,9 @@ Edge::Edge(const EdgeId& edge_id,
            const VertexId& vertex1,
            const VertexId& vertex2,
            const EdgeColor& edge_color)
-    : vertex1_id(vertex1),
-      vertex2_id(vertex2),
-      color(edge_color),
-      id(edge_id) {}
+    : vertex1_id(vertex1), vertex2_id(vertex2), color(edge_color), id(edge_id) {
+  duration_ = get_edge_duration(edge_color);
+}
 
 const std::set<EdgeId>& Vertex::connected_edges() const {
   return connected_edges_;

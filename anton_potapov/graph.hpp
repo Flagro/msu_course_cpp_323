@@ -33,6 +33,8 @@ class Vertex {
 
 class Edge {
  public:
+  using Duration = int;
+
   const VertexId vertex1_id, vertex2_id;
   const EdgeColor color;
   const EdgeId id;
@@ -40,6 +42,9 @@ class Edge {
        const VertexId& vertex1,
        const VertexId& vertex2,
        const EdgeColor& edge_color);
+
+ private:
+  Duration duration_;
 };
 
 class Graph {
