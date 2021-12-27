@@ -122,7 +122,11 @@ GraphPath GraphTraverser::find_dijkstra_path(
   vertices_id_path.push_back(source_vertex_id);
   std::reverse(vertices_id_path.begin(), vertices_id_path.end());
   std::reverse(edges_id_path.begin(), edges_id_path.end());
-  return GraphPath(graph_, vertices_id_path, edges_id_path);
+  Edge::Duration duration = 0;
+  for (const auto& edge_id : edges_id_path) {
+    duration += graph_.get_edge(edge_id).get_duration();
+  }
+  return GraphPath(vertices_id_path, edges_id_path, duration);
 }
 
 GraphPath GraphTraverser::find_shortest_path(
@@ -136,7 +140,7 @@ GraphPath GraphTraverser::find_fastest_path(
     VertexId source_vertex_id,
     VertexId destination_vertex_id) const {
   return find_dijkstra_path(source_vertex_id, destination_vertex_id,
-                            [this](const EdgeId& edge_id) {
+                            [&graph_ = graph_](const EdgeId& edge_id) {
                               return graph_.get_edge(edge_id).get_duration();
                             });
 }

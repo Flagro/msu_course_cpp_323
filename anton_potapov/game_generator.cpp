@@ -1,5 +1,7 @@
-#include "game_generator.hpp"
+#include <utility>
+
 #include "game.hpp"
+#include "game_generator.hpp"
 #include "graph.hpp"
 #include "graph_generator.hpp"
 
@@ -11,6 +13,6 @@ Game GameGenerator::generate_game() const {
   const auto knight_position = graph.get_root_vertex_id();
   const auto princess_position =
       get_random_vertex_id(graph.get_vertices_at_depth(graph.depth()));
-  return Game(graph, knight_position, princess_position);
+  return Game(std::move(graph), knight_position, princess_position);
 }
 }  // namespace uni_cource_cpp

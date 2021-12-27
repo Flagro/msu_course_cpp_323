@@ -20,7 +20,7 @@ constexpr std::array<Edge::Duration, 2> blue_duration_segment = {1, 2};
 constexpr std::array<Edge::Duration, 2> yellow_duration_segment = {1, 3};
 constexpr std::array<Edge::Duration, 2> red_duration_segment = {2, 4};
 
-std::array<Edge::Duration, 2> get_edge_duration_segment(
+constexpr std::array<Edge::Duration, 2> get_edge_duration_segment(
     const EdgeColor& edge_color) {
   switch (edge_color) {
     case EdgeColor::Gray:
