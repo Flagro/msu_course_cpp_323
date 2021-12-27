@@ -53,9 +53,11 @@ Edge::Edge(const EdgeId& edge_id,
            const VertexId& vertex1,
            const VertexId& vertex2,
            const EdgeColor& edge_color)
-    : vertex1_id(vertex1), vertex2_id(vertex2), color(edge_color), id(edge_id) {
-  duration_ = get_edge_duration(edge_color);
-}
+    : vertex1_id(vertex1),
+      vertex2_id(vertex2),
+      color(edge_color),
+      id(edge_id),
+      duration_(get_edge_duration(edge_color)) {}
 
 const Edge::Duration& Edge::get_duration() const {
   return duration_;
