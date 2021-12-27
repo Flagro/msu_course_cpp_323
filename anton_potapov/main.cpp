@@ -5,6 +5,7 @@
 
 #include "config.hpp"
 #include "game_generator.hpp"
+#include "game_printer.hpp"
 #include "graph_generator.hpp"
 #include "graph_input_handler.hpp"
 #include "graph_path.hpp"
@@ -13,6 +14,7 @@
 #include "logger.hpp"
 
 using uni_cource_cpp::GameGenerator;
+using uni_cource_cpp::GamePrinter;
 using uni_cource_cpp::GraphGenerator;
 using uni_cource_cpp::GraphInputHandler;
 using uni_cource_cpp::GraphPath;
@@ -44,24 +46,27 @@ int main() {
 
   auto& logger = Logger::get_logger();
 
-  // logger.log(LogMessagesGenerator::game_preparing_string());
+  logger.log(LogMessagesGenerator::game_preparing_string());
 
   const auto params = GraphGenerator::Params(depth, new_vertices_count);
 
   const auto game_generator = GameGenerator(params);
   auto game = game_generator.generate_game();
 
-  // logger.log(LogMessagesGenerator::game_ready_string(game));
-  // logger.log(LogMessagesGenerator::shortest_path_searching_string());
+  logger.log(
+      LogMessagesGenerator::game_ready_string(GamePrinter(game).print_game()));
+  logger.log(LogMessagesGenerator::shortest_path_searching_string());
 
   const auto shortest_path = game.find_shortest_path();
 
-  // logger.log(LogMessagesGenerator::shortest_path_ready_string(shortest_path));
-  // logger.log(LogMessagesGenerator::fastest_path_searching_string());
+  logger.log(LogMessagesGenerator::shortest_path_ready_string(
+      GraphPrinter::print_path(shortest_path)));
+  logger.log(LogMessagesGenerator::fastest_path_searching_string());
 
   const auto fastest_path = game.find_fastest_path();
 
-  // logger.log(LogMessagesGenerator::fastest_path_ready_string(fastest_path));
+  logger.log(LogMessagesGenerator::fastest_path_ready_string(
+      GraphPrinter::print_path(fastest_path)));
 
   const auto map_json = GraphPrinter(game.map()).print();
   write_to_file(map_json, "map.json");

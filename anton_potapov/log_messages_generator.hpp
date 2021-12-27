@@ -17,5 +17,11 @@ class LogMessagesGenerator {
   static std::string traversal_started_string(int index);
   static std::string traversal_finished_string(int index,
                                                const std::string& paths);
+  static std::string game_preparing_string();
+  static std::string game_ready_string(const std::string& game_description);
+  static std::string shortest_path_searching_string();
+  static std::string shortest_path_ready_string(const std::string& path_string);
+  static std::string fastest_path_searching_string();
+  static std::string fastest_path_ready_string(const std::string& path_string);
 };
 }  // namespace uni_cource_cpp

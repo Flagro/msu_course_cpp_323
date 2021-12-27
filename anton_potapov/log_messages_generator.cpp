@@ -62,4 +62,26 @@ std::string LogMessagesGenerator::traversal_finished_string(
       << ", Traversal Finished, Paths: " << graph_paths << std::endl;
   return traversal_finished_stringstream.str();
 }
+
+std::string LogMessagesGenerator::game_preparing_string() {
+  return "";
+}
+std::string LogMessagesGenerator::game_ready_string(
+    const std::string& game_description) {
+  return "";
+};
+std::string LogMessagesGenerator::shortest_path_searching_string() {
+  return "";
+}
+std::string LogMessagesGenerator::shortest_path_ready_string(
+    const std::string& path_string) {
+  return "";
+}
+std::string LogMessagesGenerator::fastest_path_searching_string() {
+  return "";
+}
+std::string LogMessagesGenerator::fastest_path_ready_string(
+    const std::string& path_string) {
+  return "";
+}
 }  // namespace uni_cource_cpp
