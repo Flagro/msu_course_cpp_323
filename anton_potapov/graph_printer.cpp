@@ -76,7 +76,7 @@ std::string GraphPrinter::print_graph_description() const {
     }
   }
   graph_description_stringstream << "}}" << std::endl;
-  graph_description_stringstream << "}" << std::endl;
+  graph_description_stringstream << "}";
   return graph_description_stringstream.str();
 }
 
