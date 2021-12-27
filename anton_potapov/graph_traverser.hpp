@@ -26,13 +26,14 @@ class GraphTraverser {
       std::set<VertexId> destination_vertices_ids) const;
 
  private:
-  using TraversalStartedCallback = std::function<void(const EdgeId& edge_id)>;
+  using Weight = int;
+  using GetWeightCallback = std::function<Weight(const EdgeId& edge_id)>;
 
   const Graph& graph_;
 
   GraphPath find_dijkstra_path(
       VertexId source_vertex_id,
       VertexId destination_vertex_id,
-      const TraversalStartedCallback& get_weight_callback) const;
+      const GetWeightCallback& get_weight_callback) const;
 };
 }  // namespace uni_cource_cpp

@@ -22,6 +22,7 @@ std::string GamePrinter::print_game() const {
   result_stringstream << "\tprincess position: "
                       << print_position(game_.princess_position) << std::endl
                       << "}";
+  return result_stringstream.str();
 };
 
 std::string GamePrinter::print_position(const VertexId& vertex_id) const {

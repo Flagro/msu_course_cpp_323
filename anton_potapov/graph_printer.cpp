@@ -105,7 +105,7 @@ std::string GraphPrinter::print_edge(const Edge& Edge) const {
   return json_stringstream.str();
 }
 
-static std::string print_path(const GraphPath& path) {
+std::string GraphPrinter::print_path(const GraphPath& path) {
   std::stringstream graph_paths_stringstream;
   graph_paths_stringstream << "\t{vertices: [";
   for (auto vertex_id_it = path.path_vector_ids().begin();
@@ -117,6 +117,7 @@ static std::string print_path(const GraphPath& path) {
   }
   graph_paths_stringstream << "], distance: " << path.distance()
                            << ", duration: " << path.duration() << "}";
+  return graph_paths_stringstream.str();
 }
 
 std::string GraphPrinter::print_paths(std::vector<GraphPath> paths) {

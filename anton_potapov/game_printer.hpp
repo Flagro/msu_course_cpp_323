@@ -7,7 +7,7 @@ class GamePrinter {
  public:
   explicit GamePrinter(Game& input_game);
   std::string print_game() const;
-  std::string print_position() const;
+  std::string print_position(const VertexId& vertex_id) const;
 
  private:
   Game& game_;

@@ -71,10 +71,10 @@ std::map<VertexId, int> GraphTraverser::get_updated_depths(
   return depths;
 }
 
-GraphPath find_dijkstra_path(
+GraphPath GraphTraverser::find_dijkstra_path(
     VertexId source_vertex_id,
     VertexId destination_vertex_id,
-    const TraversalStartedCallback& get_weight_callback) const {
+    const GetWeightCallback& get_weight_callback) const {
   std::map<VertexId, GraphPath::Distance> distance;
   distance[source_vertex_id] = 0;
   std::map<VertexId, std::pair<VertexId, EdgeId>> previous_vertex_id;
@@ -130,7 +130,7 @@ GraphPath GraphTraverser::find_shortest_path(
     VertexId destination_vertex_id) const {
   return find_dijkstra_path(
       source_vertex_id, destination_vertex_id,
-      [](const EdgeId& edge_id) { return DEFAULT_DISTANCE; });
+      [](const EdgeId&) { return DEFAULT_DISTANCE; });
 }
 
 GraphPath GraphTraverser::find_fastest_path(

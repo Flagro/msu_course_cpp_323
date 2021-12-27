@@ -39,7 +39,7 @@ std::array<Edge::Duration, 2> get_edge_duration_segment(
 Edge::Duration get_edge_duration(const EdgeColor& edge_color) {
   std::random_device rd;
   std::mt19937 gen(rd());
-  const duration_segment = get_edge_duration_segment(edge_color);
+  const auto duration_segment = get_edge_duration_segment(edge_color);
   std::uniform_int_distribution<> distr(duration_segment[0],
                                         duration_segment[1]);
   return distr(gen);
@@ -57,7 +57,7 @@ Edge::Edge(const EdgeId& edge_id,
   duration_ = get_edge_duration(edge_color);
 }
 
-const Duration& Edge::get_duration() const {
+const Edge::Duration& Edge::get_duration() const {
   return duration_;
 }
 
