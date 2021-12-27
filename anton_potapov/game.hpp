@@ -5,9 +5,12 @@
 namespace uni_cource_cpp {
 class Game {
  public:
+  const VertexId knight_position;
+  const VertexId princess_position;
+
   Game(Graph game_map,
-       const VertexId& knight_position,
-       const VertexId& princess_position);
+       const VertexId& knight_position_id,
+       const VertexId& princess_position_id);
 
   GraphPath find_shortest_path() const;
   GraphPath find_fastest_path() const;
@@ -15,7 +18,5 @@ class Game {
 
  private:
   Graph game_map_;
-  const VertexId knight_position_;
-  const VertexId princess_position_;
 };
 }  // namespace uni_cource_cpp
