@@ -12,7 +12,13 @@
 
 #include "config.hpp"
 #include "graph.hpp"
+#include "graph_path.hpp"
 #include "graph_traverser.hpp"
+
+namespace {
+using uni_cource_cpp::GraphPath;
+constexpr GraphPath::Distance DEFAULT_DISTANCE = 1;
+}  // namespace
 
 namespace uni_cource_cpp {
 GraphTraverser::GraphTraverser(const Graph& graph) : graph_(graph) {}
@@ -86,10 +92,10 @@ GraphPath GraphTraverser::find_shortest_path(
                                         ? current_edge.vertex2_id
                                         : current_edge.vertex1_id);
       if (distance.find(next_vertex_id) == distance.end() ||
-          current_distance + 1 < distance[next_vertex_id]) {
+          current_distance + DEFAULT_DISTANCE < distance[next_vertex_id]) {
         lowest_distance_set.erase(
             std::make_pair(distance[next_vertex_id], next_vertex_id));
-        distance[next_vertex_id] = current_distance + 1;
+        distance[next_vertex_id] = current_distance + DEFAULT_DISTANCE;
         lowest_distance_set.insert(
             std::make_pair(distance[next_vertex_id], next_vertex_id));
         previous_vertex_id[next_vertex_id] =
