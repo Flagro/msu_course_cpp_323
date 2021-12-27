@@ -12,6 +12,7 @@ class GraphPrinter {
   std::string print_graph_description() const;
   std::string print_vertex(const Vertex& vertex) const;
   std::string print_edge(const Edge& Edge) const;
+  static std::string print_path(const GraphPath& path);
   static std::string print_paths(std::vector<GraphPath> paths);
 
  private:

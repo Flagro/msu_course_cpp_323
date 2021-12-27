@@ -105,19 +105,25 @@ std::string GraphPrinter::print_edge(const Edge& Edge) const {
   return json_stringstream.str();
 }
 
+static std::string print_path(const GraphPath& path) {
+  std::stringstream graph_paths_stringstream;
+  graph_paths_stringstream << "\t{vertices: [";
+  for (auto vertex_id_it = path.path_vector_ids().begin();
+       vertex_id_it != path.path_vector_ids().end(); ++vertex_id_it) {
+    graph_paths_stringstream << *vertex_id_it;
+    if (std::next(vertex_id_it) != path.path_vector_ids().end()) {
+      graph_paths_stringstream << ", ";
+    }
+  }
+  graph_paths_stringstream << "], distance: " << path.distance()
+                           << ", duration: " << path.duration() << "}";
+}
+
 std::string GraphPrinter::print_paths(std::vector<GraphPath> paths) {
   std::stringstream graph_paths_stringstream;
   graph_paths_stringstream << "[" << std::endl;
   for (auto it = paths.begin(); it != paths.end(); ++it) {
-    graph_paths_stringstream << "\t{vertices: [";
-    for (auto vertex_id_it = it->path_vector_ids().begin();
-         vertex_id_it != it->path_vector_ids().end(); ++vertex_id_it) {
-      graph_paths_stringstream << *vertex_id_it;
-      if (std::next(vertex_id_it) != it->path_vector_ids().end()) {
-        graph_paths_stringstream << ", ";
-      }
-    }
-    graph_paths_stringstream << "], distance: " << it->distance() << "}";
+    print_path(*it);
     if (std::next(it) != paths.end()) {
       graph_paths_stringstream << ",";
     }
