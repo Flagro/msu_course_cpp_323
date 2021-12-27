@@ -122,7 +122,7 @@ GraphPath find_dijkstra_path(
   vertices_id_path.push_back(source_vertex_id);
   std::reverse(vertices_id_path.begin(), vertices_id_path.end());
   std::reverse(edges_id_path.begin(), edges_id_path.end());
-  return GraphPath(vertices_id_path, edges_id_path);
+  return GraphPath(graph_, vertices_id_path, edges_id_path);
 }
 
 GraphPath GraphTraverser::find_shortest_path(

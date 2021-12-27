@@ -57,7 +57,7 @@ Edge::Edge(const EdgeId& edge_id,
   duration_ = get_edge_duration(edge_color);
 }
 
-const Duration& Edge::get_duration() {
+const Duration& Edge::get_duration() const {
   return duration_;
 }
 

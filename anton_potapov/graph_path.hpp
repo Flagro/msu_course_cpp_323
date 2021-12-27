@@ -9,13 +9,17 @@ class GraphPath {
  public:
   using Distance = int;
 
-  GraphPath(std::vector<VertexId> vertex_ids, std::vector<EdgeId> edge_ids);
+  GraphPath(const Graph& graph_,
+            std::vector<VertexId> vertex_ids,
+            std::vector<EdgeId> edge_ids);
 
   const std::vector<VertexId>& path_vector_ids() const;
 
   Distance distance() const;
+  Edge::Duration duration() const;
 
  private:
+  const Graph& graph_;
   std::vector<VertexId> vertex_ids_;
   std::vector<EdgeId> edge_ids_;
 };
