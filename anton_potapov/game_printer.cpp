@@ -1,5 +1,9 @@
-#include "game_printer.hpp"
+#include <iostream>
+#include <sstream>
+#include <string>
+
 #include "game.hpp"
+#include "game_printer.hpp"
 #include "graph.hpp"
 #include "graph_printer.hpp"
 
