@@ -128,9 +128,8 @@ GraphPath GraphTraverser::find_dijkstra_path(
 GraphPath GraphTraverser::find_shortest_path(
     VertexId source_vertex_id,
     VertexId destination_vertex_id) const {
-  return find_dijkstra_path(
-      source_vertex_id, destination_vertex_id,
-      [](const EdgeId&) { return DEFAULT_DISTANCE; });
+  return find_dijkstra_path(source_vertex_id, destination_vertex_id,
+                            [](const EdgeId&) { return DEFAULT_DISTANCE; });
 }
 
 GraphPath GraphTraverser::find_fastest_path(
