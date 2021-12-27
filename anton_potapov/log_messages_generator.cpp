@@ -64,24 +64,44 @@ std::string LogMessagesGenerator::traversal_finished_string(
 }
 
 std::string LogMessagesGenerator::game_preparing_string() {
-  return "";
+  std::stringstream game_preparing_stringstream;
+  game_preparing_stringstream << get_current_date_time()
+                              << " Game is preparing..." << std::endl;
+  return game_preparing_stringstream.str();
 }
 std::string LogMessagesGenerator::game_ready_string(
     const std::string& game_description) {
-  return "";
+  std::stringstream game_ready_stringstream;
+  game_ready_stringstream << get_current_date_time() << " Game is ready "
+                          << game_description << std::endl;
+  return game_ready_stringstream.str();
 };
 std::string LogMessagesGenerator::shortest_path_searching_string() {
-  return "";
+  std::stringstream path_searching_started_stringstream;
+  path_searching_started_stringstream << get_current_date_time()
+                                      << " Searching for the shortest path..."
+                                      << std::endl;
+  return path_searching_started_stringstream.str();
 }
 std::string LogMessagesGenerator::shortest_path_ready_string(
     const std::string& path_string) {
-  return "";
+  std::stringstream shortest_path_stringstream;
+  shortest_path_stringstream << get_current_date_time()
+                             << " Shortest Path: " << path_string << std::endl;
+  return shortest_path_stringstream.str();
 }
 std::string LogMessagesGenerator::fastest_path_searching_string() {
-  return "";
+  std::stringstream path_searching_started_stringstream;
+  path_searching_started_stringstream << get_current_date_time()
+                                      << " Searching for the fastest path..."
+                                      << std::endl;
+  return path_searching_started_stringstream.str();
 }
 std::string LogMessagesGenerator::fastest_path_ready_string(
     const std::string& path_string) {
-  return "";
+  std::stringstream fastest_path_stringstream;
+  fastest_path_stringstream << get_current_date_time()
+                            << " Fastest Path: " << path_string << std::endl;
+  return fastest_path_stringstream.str();
 }
 }  // namespace uni_cource_cpp
